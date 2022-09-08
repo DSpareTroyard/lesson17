@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie.title }}</title>
+</head>
+<body>
+<h1>{{ movie.title }}</h1>
+<h3><a href="/directors/{{ movie.director_id }}/">{{ movie.director_name }}</a>, {{ movie.year }}</h3>
+<i><a href="/genres/{{ movie.genre_id }}/">{{ movie.genre_name }}</a></i>
+<p>{{ movie.description }}</p>
+<p><a href="{{ movie.trailer }}" target="_blank">Смотреть трейлер</a></p>
+<p>Рейтинг: {{ movie.rating }}</p>
+<p>(id:{{ movie.id }})</p>
+<a href="/movies/">К списку фильмов</a>
+</body>
+</html>

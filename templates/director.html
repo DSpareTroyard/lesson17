@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ director.name }}</title>
+</head>
+<body>
+<h1>{{ director.name }}</h1>
+{% for movie in movies %}
+    <p><a href="/movies/{{ movie.id }}/">{{ movie.id }}. {{ movie.title }}</a></p>
+{% endfor %}
+
+<form action="/movies/" method="GET">
+    <input type="hidden" name="director_id" readonly value="{{ director.id }}"/>
+    <input type="submit" value="К фильмам режиссера"/>
+</form>
+
+<a href="/directors/">К списку режиссеров</a>
+</body>
+</html>

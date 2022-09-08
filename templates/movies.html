@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+</head>
+<body>
+<table>
+    <tr>
+        {% for movie in movies_info %}
+            <td>
+                <h1><a href="/movies/{{ movie.id }}/">{{ movie.title }}</a></h1>
+                <h3><a href="/directors/{{ movie.director_id }}/">{{ movie.director_name }}</a>, {{ movie.year }}</h3>
+                <i><a href="/genres/{{ movie.genre_id }}/">{{ movie.genre_name }}</a></i>
+                {% if movie.description|length > 150 %}
+                    <p>{{ movie.description[:150] }}...</p>
+                {% else %}
+                    <p>{{ movie.description }}</p>
+                {% endif %}
+                <p><a href="{{ movie.trailer }}" target="_blank">Смотреть трейлер</a></p>
+                <p>Рейтинг: {{ movie.rating }}</p>
+                <p>(id:{{ movie.id }})</p>
+            </td>
+        {% endfor %}
+    </tr>
+</table>
+<table>
+    <tr>
+        <td>
+            {% if page|int > 1 %}
+                <form action="/movies/" method="GET">
+                    <input type="hidden" name="p" readonly value="{{ page|int - 1 }}"/>
+                    {% if director_id %}
+                    <input type="hidden" name="director_id" readonly value="{{ director_id }}"/>
+                    {% endif %}
+                    {% if genre_id %}
+                    <input type="hidden" name="genre_id" readonly value="{{ genre_id }}"/>
+                    {% endif %}
+                    <input type="submit" value="Назад"/>
+                </form>
+            {% endif %}
+        </td>
+        <td>
+            <form action="/movies/" method="GET">
+                <input type="hidden" name="p" readonly value="{{ page|int + 1 }}"/>
+                {% if director_id %}
+                <input type="hidden" name="director_id" readonly value="{{ director_id }}"/>
+                {% endif %}
+                {% if genre_id %}
+                <input type="hidden" name="genre_id" readonly value="{{ genre_id }}"/>
+                {% endif %}
+                <input type="submit" value="Дальше"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
