@@ -273,6 +273,19 @@ class DirectorView(Resource):
 
         return "", 204
 
+    def patch(self, did):
+        if not Director.query.get(did):
+            return "", 404
+
+        director = Director.query.get(did)
+        req_json = request.json
+        if 'name' in req_json:
+            director.name = req_json['name']
+        db.session.add(director)
+        db.session.commit()
+
+        return "", 204
+
     def delete(self, did):
         if not Director.query.get(did):
             return "", 404
@@ -320,6 +333,18 @@ class GenreView(Resource):
         genre = Genre.query.get(gid)
         req_json = request.json
         genre.name = req_json['name']
+        db.session.add(genre)
+        db.session.commit()
+
+        return "", 204
+
+    def patch(self, gid):
+        if not Genre.query.get(gid):
+            return "", 404
+        genre = Genre.query.get(gid)
+        req_json = request.json
+        if 'name' in req_json:
+            genre.name = req_json['name']
         db.session.add(genre)
         db.session.commit()
 
